@@ -33,8 +33,6 @@ func scramble(moveCount int, fruOnly bool) {
 
 	if fruOnly != true {
 		moves = append(moves, "B", "D", "L")
-	} else {
-		moves = append(moves, "f", "r", "u")
 	}
 
 	var algo []string
@@ -54,12 +52,17 @@ func scramble(moveCount int, fruOnly bool) {
 		var next []string
 		next = append([]string{nextMove})
 
+		wide := seed.Intn(2)
+		if wide == 1 {
+			next = append(next, "w")
+		}
+
 		ccw := seed.Intn(2)
 		if ccw == 1 {
 			next = append(next, "'")
 		}
 
-		if s.ToUpper(nextMove) == nextMove && ccw == 0 {
+		if ccw == 0 {
 			turnCount := seed.Intn(2)
 			if turnCount == 1 {
 				next = append(next, "2")
